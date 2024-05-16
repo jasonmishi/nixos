@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# source - https://superuser.com/questions/1332519/how-to-git-commit-as-root-on-linux
+# allows to git commit with .gitconfig included when using sudo
+
+config=include.path=$HOME/.gitconfig
+sudo git -c "$config" $@
