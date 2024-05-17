@@ -41,7 +41,10 @@ in
     xkbVariant = "";
     enable = true;
     displayManager.lightdm.enable = true;
-    windowManager.qtile.enable = true;
+    windowManager.qtile = {
+      enable = true;
+      #configFile = ./qtile/config.py;
+    };
     desktopManager = {
       xterm.enable = false;
       xfce.enable = true;
@@ -67,6 +70,15 @@ in
   environment.shellAliases = {
     sgit = "sudo git -c \"include.path=\${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\"";
   };
+
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
