@@ -64,6 +64,10 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  environment.shellAliases = {
+    sgit = "sudo git -c \"include.path=\${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\"";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
