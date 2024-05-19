@@ -61,7 +61,9 @@ in
     isNormalUser = true;
     description = "Jason Mishike";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [
+      poetry
+    ];
   };
 
   # Allow unfree packages
