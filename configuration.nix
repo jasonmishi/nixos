@@ -97,7 +97,9 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
      neofetch
+
      pavucontrol
+     cmus
 
      kitty
      floorp
