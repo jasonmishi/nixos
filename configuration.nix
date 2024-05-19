@@ -87,7 +87,21 @@ in
      
      kitty
      floorp
-     vscode
+     (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions; [
+          vscodevim.vim
+          jdinhlife.gruvbox
+          github.copilot
+          github.copilot-chat
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+	  {
+	    name = "remote-ssh";
+	    publisher = "ms-vscode-remote";
+	    sha256 = "a2cf2a95028cac1970429737898ebea7b753f9facb29e15296b1cea27d4b45fb";
+	    version = "0.108.2023112915";
+	  }
+        ];
+     })
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
