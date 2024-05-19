@@ -103,7 +103,6 @@ in
      cmus
      nicotine-plus
 
-     kitty
      floorp
      google-chrome
      (vscode-with-extensions.override {
@@ -129,6 +128,10 @@ in
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
   
   home-manager.users.jasonmishi = {
     home.packages = [ (pkgs.buildEnv { name = "my-scripts"; paths = [ ./scripts ]; }) ];
@@ -139,6 +142,10 @@ in
         extraConfig = ''
           set number relativenumber
         '';
+      };
+      kitty = {
+        enable = true;
+        font.name = "Fira Code";
       };
     };
 
