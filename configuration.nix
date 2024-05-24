@@ -52,7 +52,7 @@ in
     displayManager.defaultSession = "none+qtile";
   };
 
-  # for pipewire
+  # for audio (pipewire)
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -62,6 +62,9 @@ in
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+
+  # for power management (tlp)
+  services.tlp.enable = true;
 
   programs = {
     git.enable = true;
