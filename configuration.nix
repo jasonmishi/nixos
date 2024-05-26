@@ -128,6 +128,7 @@ in
           jdinhlife.gruvbox
           github.copilot
           github.copilot-chat
+          james-yu.latex-workshop
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 	  {
 	    name = "remote-ssh";
