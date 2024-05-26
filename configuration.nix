@@ -40,10 +40,12 @@ in
     layout = "us";
     xkbVariant = "";
     enable = true;
+
+    # display manaer and window manager
     displayManager.lightdm.enable = true;
     windowManager.qtile = {
       enable = true;
-      #configFile = ./qtile/config.py;
+      configFile = ./qtile/config.py;
     };
     desktopManager = {
       xterm.enable = false;
