@@ -70,6 +70,7 @@ in
 
   programs = {
     git.enable = true;
+    firefox.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -108,7 +109,6 @@ in
      cmus
      nicotine-plus
 
-     floorp
      google-chrome
      (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions; [
