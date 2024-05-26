@@ -41,6 +41,14 @@ in
     xkbVariant = "";
     enable = true;
 
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+	tappingButtonMap = "lrm";
+      };
+    };
+
     # display manaer and window manager
     displayManager.lightdm.enable = true;
     windowManager.qtile = {
