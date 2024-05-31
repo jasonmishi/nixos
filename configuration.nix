@@ -97,7 +97,16 @@ in
     description = "Jason Mishike";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      cmus
+      nicotine-plus
+
       poetry
+
+      liferea
+
+      zotero
+      obsidian
+      calibre
     ];
   };
 
@@ -126,8 +135,6 @@ in
      neofetch
 
      pavucontrol
-     cmus
-     nicotine-plus
 
      google-chrome
      (vscode-with-extensions.override {
@@ -147,9 +154,6 @@ in
         ];
      })
 
-     zotero
-     obsidian
-     calibre
 
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
