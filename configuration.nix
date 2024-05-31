@@ -31,6 +31,14 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Set DNS resolvers
+  networking.nameservers = [
+    "1.1.1.3"
+    "1.0.0.3"
+  ];
+  networking.dhcpcd.extraConfig = "nohook resolv.conf";
+  networking.networkmanager.dns = "none";
+
   # Set your time zone.
   time.timeZone = "Asia/Colombo";
 
