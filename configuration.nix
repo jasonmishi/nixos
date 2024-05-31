@@ -5,16 +5,16 @@
 { config, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-  nixos-hardware = builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
-in
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      (import "${nixos-hardware}/lenovo/thinkpad/t480")
-      ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
-    ];
+  home-manager = builtins.fetchTarball
+    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+  nixos-hardware =
+    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+in {
+  imports = [ # Include the results of the hardware scan.
+    (import "${nixos-hardware}/lenovo/thinkpad/t480")
+    ./hardware-configuration.nix
+    (import "${home-manager}/nixos")
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -32,10 +32,7 @@ in
   networking.networkmanager.enable = true;
 
   # Set DNS resolvers
-  networking.nameservers = [
-    "1.1.1.3"
-    "1.0.0.3"
-  ];
+  networking.nameservers = [ "1.1.1.3" "1.0.0.3" ];
   networking.dhcpcd.extraConfig = "nohook resolv.conf";
   networking.networkmanager.dns = "none";
 
@@ -55,7 +52,7 @@ in
       enable = true;
       touchpad = {
         tapping = true;
-	tappingButtonMap = "lrm";
+        tappingButtonMap = "lrm";
       };
     };
 
@@ -114,7 +111,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.shellAliases = {
-    sgit = "sudo git -c \"include.path=\${XDG_CONFIG_DIR:-$HOME/.config}/git/config\" -c \"include.path=$HOME/.gitconfig\"";
+    sgit = ''
+      sudo git -c "include.path=''${XDG_CONFIG_DIR:-$HOME/.config}/git/config" -c "include.path=$HOME/.gitconfig"'';
     vim = "nvim";
     svim = "sudo -E -s nvim";
   };
@@ -127,48 +125,50 @@ in
     };
   };
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
   environment.systemPackages = with pkgs; [
-     nixfmt
+    nixfmt
 
-     neofetch
+    neofetch
 
-     pavucontrol
+    pavucontrol
 
-     google-chrome
-     (vscode-with-extensions.override {
-        vscodeExtensions = with vscode-extensions; [
+    google-chrome
+    (vscode-with-extensions.override {
+      vscodeExtensions = with vscode-extensions;
+        [
           vscodevim.vim
           jdinhlife.gruvbox
           github.copilot
           github.copilot-chat
           james-yu.latex-workshop
-        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-	  {
-	    name = "remote-ssh";
-	    publisher = "ms-vscode-remote";
-	    sha256 = "a2cf2a95028cac1970429737898ebea7b753f9facb29e15296b1cea27d4b45fb";
-	    version = "0.108.2023112915";
-	  }
-        ];
-     })
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+          name = "remote-ssh";
+          publisher = "ms-vscode-remote";
+          sha256 =
+            "a2cf2a95028cac1970429737898ebea7b753f9facb29e15296b1cea27d4b45fb";
+          version = "0.108.2023112915";
+        }];
+    })
 
-
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
-  
+  fonts.packages = with pkgs;
+    [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+
   home-manager.users.jasonmishi = {
-    home.packages = [ (pkgs.buildEnv { name = "my-scripts"; paths = [ ./scripts ]; }) ];
+    home.packages = [
+      (pkgs.buildEnv {
+        name = "my-scripts";
+        paths = [ ./scripts ];
+      })
+    ];
 
-    programs= {
+    programs = {
       neovim = {
         enable = true;
         extraConfig = ''
@@ -182,9 +182,7 @@ in
     };
 
     dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
+      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
     };
 
     gtk = {
@@ -196,11 +194,11 @@ in
     };
 
     # Wayland, X, etc. support for session vars
-    systemd.user.sessionVariables = config.home-manager.users.jasonmishi.home.sessionVariables;
-
+    systemd.user.sessionVariables =
+      config.home-manager.users.jasonmishi.home.sessionVariables;
 
     # not set by default keep it as the initially installed version 
-    home.stateVersion="23.11";
+    home.stateVersion = "23.11";
   };
 
   qt = {
