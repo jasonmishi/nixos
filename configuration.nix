@@ -6,7 +6,7 @@
 
 let
   home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   nixos-hardware =
     builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
 in {
@@ -44,17 +44,11 @@ in {
 
   # Configure X11 settings
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    enable = true;
-
-    libinput = {
-      enable = true;
-      touchpad = {
-        tapping = true;
-        tappingButtonMap = "lrm";
-      };
+    xkb = {
+      variant = "";
+      layout = "us";
     };
+    enable = true;
 
     # display manaer and window manager
     displayManager.lightdm.enable = true;
@@ -66,7 +60,15 @@ in {
       xterm.enable = false;
       xfce.enable = true;
     };
-    displayManager.defaultSession = "none+qtile";
+  };
+
+  services.displayManager.defaultSession = "none+qtile";
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      tapping = true;
+      tappingButtonMap = "lrm";
+    };
   };
 
   # for audio (pipewire)
@@ -129,7 +131,7 @@ in {
   # $ nix search wget
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
   environment.systemPackages = with pkgs; [
-    nixfmt
+    nixfmt-classic
 
     neofetch
 
