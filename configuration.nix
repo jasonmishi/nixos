@@ -85,7 +85,12 @@ in {
 
   programs = {
     git.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      viAlias = true;
+    };
     firefox.enable = true;
     light.enable = true;
   };
@@ -116,7 +121,6 @@ in {
   environment.shellAliases = {
     sgit = ''
         sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git -c "include.path=''${XDG_CONFIG_DIR:-$HOME/.config}/git/config" -c "include.path=$HOME/.gitconfig"'';
-    vim = "nvim";
     svim = "sudo -E -s nvim";
   };
 
