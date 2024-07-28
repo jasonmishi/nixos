@@ -93,6 +93,8 @@ in {
     };
     firefox.enable = true;
     light.enable = true;
+    zsh.enable = true;
+    starship.enable = true;
   };
   programs.ssh.startAgent = true;
 
@@ -194,7 +196,6 @@ in {
     style = "adwaita-dark";
   };
 
-  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
   # Some programs need SUID wrappers, can be configured further or are
