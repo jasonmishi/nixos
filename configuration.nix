@@ -85,6 +85,7 @@ in {
 
   programs = {
     git.enable = true;
+    neovim.enable = true;
     firefox.enable = true;
   };
 
@@ -155,12 +156,6 @@ in {
     ];
 
     programs = {
-      neovim = {
-        enable = true;
-        extraConfig = ''
-          set number relativenumber
-        '';
-      };
       kitty = {
         enable = true;
         font.name = "Fira Code";
