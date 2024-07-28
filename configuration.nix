@@ -87,13 +87,14 @@ in {
     git.enable = true;
     neovim.enable = true;
     firefox.enable = true;
+    light.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jasonmishi = {
     isNormalUser = true;
     description = "Jason Mishike";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
       cmus
       nicotine-plus
