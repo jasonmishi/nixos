@@ -50,10 +50,7 @@ in {
 
     # display manaer and window manager
     displayManager.lightdm.enable = true;
-    windowManager.qtile = {
-      enable = true;
-      configFile = ./qtile/config.py;
-    };
+    windowManager.qtile = { enable = true; };
     desktopManager = {
       xterm.enable = false;
       xfce.enable = true;
@@ -162,6 +159,12 @@ in {
         paths = [ ./scripts ];
       })
     ];
+
+    home.file.qtile_config = {
+      source = ./qtile;
+      target = ".config/qtile";
+      recursive = true;
+    };
 
     programs = {
       kitty = {
