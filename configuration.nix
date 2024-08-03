@@ -77,7 +77,8 @@ in {
     #jack.enable = true;
   };
 
-  # for power management (tlp)
+  # for power management
+  services.thermald.enable = true;
   services.tlp = {
     enable = true;
     settings = {
