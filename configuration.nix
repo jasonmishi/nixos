@@ -124,17 +124,17 @@ in {
     description = "Jason Mishike";
     extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
-      feh
-      cmus
+      feh # wallpaper for qtile
+      cmus # music player
       nicotine-plus
 
-      poetry
+      poetry # python package manager
 
-      liferea
+      liferea # RSS reader subscription
 
-      zotero
-      obsidian
-      calibre
+      zotero # reference manager
+      obsidian # next gen note taking
+      calibre # ebook manager
     ];
   };
 
@@ -159,8 +159,8 @@ in {
   # $ nix search wget
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
   environment.systemPackages = with pkgs; [
-    xclip
-    ntfs3g
+    xclip # clipboard support for neovim
+    ntfs3g # ntfs(windows) filesystem support for mounting
 
     nixfmt-classic
 
@@ -170,7 +170,7 @@ in {
 
     google-chrome
 
-    vscode-fhs
+    vscode-fhs # vscode with fhs for extensions1
 
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
