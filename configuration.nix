@@ -124,6 +124,7 @@ in {
     description = "Jason Mishike";
     extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
+      feh
       cmus
       nicotine-plus
 
