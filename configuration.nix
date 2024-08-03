@@ -159,6 +159,8 @@ in {
   # $ nix search wget
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
   environment.systemPackages = with pkgs; [
+    xclip
+
     nixfmt-classic
 
     neofetch
