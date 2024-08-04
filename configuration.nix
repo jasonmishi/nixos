@@ -66,16 +66,9 @@ in {
     };
   };
 
-  # for audio (pipewire)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
+  # for audio (pulseaudio)
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
 
   # for power management
   services.thermald.enable = true;
@@ -122,7 +115,7 @@ in {
   users.users.jasonmishi = {
     isNormalUser = true;
     description = "Jason Mishike";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio"];
     packages = with pkgs; [
       feh # wallpaper for qtile
       cmus # music player
