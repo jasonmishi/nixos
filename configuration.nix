@@ -155,6 +155,8 @@ in {
     xclip # clipboard support for neovim
     ntfs3g # ntfs(windows) filesystem support for mounting
 
+    unzip
+
     nixfmt-classic
 
     neofetch
