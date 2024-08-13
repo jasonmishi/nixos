@@ -168,7 +168,8 @@ in {
 
     neofetch
 
-    pavucontrol
+    pavucontrol # volume control
+    jamesdsp # EQ and effects
 
     google-chrome
 
