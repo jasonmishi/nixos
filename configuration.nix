@@ -115,6 +115,10 @@ in {
     light.enable = true;
     zsh.enable = true;
     starship.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true; # add automatic use of `appimage-run` for .Appimage files
+    };
   };
   programs.ssh.startAgent = true;
 
