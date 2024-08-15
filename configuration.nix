@@ -9,6 +9,41 @@ let
     "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   nixos-hardware =
     builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+
+  # actual budget .AppImage
+  version = "24.8.0";
+  pname = "actual-budget";
+  name = "${pname}-${version}";
+
+  src = builtins.fetchurl {
+    url =
+      "https://github.com/actualbudget/actual/releases/download/v${version}/Actual-linux.AppImage";
+    sha256 = "037aa78k818vv0fx3gr398lf1kmg6mkcpp98wv0vj7h6yjj8d6vd";
+  };
+
+  appimageContents = pkgs.appimageTools.extractType1 { inherit name src; };
+  actual-budget = pkgs.appimageTools.wrapType1 {
+    inherit name src;
+
+    extraInstallCommands = ''
+      mv $out/bin/${name} $out/bin/${pname}
+      install -m 444 -D ${appimageContents}/desktop-electron.desktop -t $out/share/applications
+      mv $out/share/applications/desktop-electron.desktop $out/share/applications/${pname}.desktop
+      substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace-fail 'Exec=AppRun' 'Exec=${pname}'
+      cp -r ${appimageContents}/usr/share/icons $out/share
+    '';
+
+    meta = {
+      description = "Envelop type budgeting software";
+      homepage = "https://github.com/actualbudget/actual";
+      downloadPage = "https://github.com/actualbudget/actual/releases";
+      license = pkgs.lib.licenses.asl20;
+      sourceProvenance = with pkgs.lib.sourceTypes; [ binaryNativeCode ];
+      platforms = [ "x86_64-linux" ];
+    };
+  };
+
 in {
   imports = [ # Include the results of the hardware scan.
     (import "${nixos-hardware}/lenovo/thinkpad/t480")
@@ -139,6 +174,8 @@ in {
       zotero # reference manager
       obsidian # next gen note taking
       calibre # ebook manager
+
+      actual-budget # budgeting software
     ];
   };
 
