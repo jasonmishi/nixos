@@ -164,18 +164,20 @@ in {
     extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
       feh # wallpaper for qtile
+      flameshot # screenshots for X11
+
       cmus # music player
       nicotine-plus
 
       poetry # python package manager
 
-      liferea # RSS reader subscription
-
       zotero # reference manager
       obsidian # next gen note taking
       calibre # ebook manager
 
+      liferea # RSS reader subscription
       actual-budget # budgeting software
+      keepassxc # password manager
     ];
   };
 
