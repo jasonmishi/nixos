@@ -168,6 +168,7 @@ in {
 
       cmus # music player
       nicotine-plus
+      qbittorrent # BitTorrent client
 
       poetry # python package manager
 
