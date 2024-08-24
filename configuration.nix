@@ -190,6 +190,7 @@ in {
     sgit = ''
       sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git -c "include.path=''${XDG_CONFIG_DIR:-$HOME/.config}/git/config" -c "include.path=$HOME/.gitconfig"'';
     svim = "sudo -E -s nvim";
+    upgrade = "nixos-rebuild switch --use-remote-sudo";
   };
 
   virtualisation.docker = {
