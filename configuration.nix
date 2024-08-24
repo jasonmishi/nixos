@@ -248,6 +248,11 @@ in {
         font.name = "Fira Code";
         theme = "Gruvbox Material Dark Medium";
       };
+
+      zsh = {
+        enable = true;
+        initExtra = ""; # create .zshrc file
+      };
     };
 
     dconf.settings = {
