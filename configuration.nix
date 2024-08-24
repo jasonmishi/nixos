@@ -155,6 +155,7 @@ in {
       binfmt = true; # add automatic use of `appimage-run` for .Appimage files
     };
   };
+  environment.pathsToLink = [ "/share/zsh" ]; # add zsh autocompletions for system packages
   programs.ssh.startAgent = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
