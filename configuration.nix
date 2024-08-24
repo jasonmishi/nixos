@@ -246,6 +246,7 @@ in {
       kitty = {
         enable = true;
         font.name = "Fira Code";
+        theme = "Gruvbox Material Dark Medium";
       };
     };
 
