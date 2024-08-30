@@ -266,33 +266,33 @@ in {
           }
         ];
         extraConfig = ''
-        lua vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true })
-        " Important!!
-        if has('termguicolors')
-            set termguicolors
-        endif
+          lua vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true })
+          " Important!!
+          if has('termguicolors')
+              set termguicolors
+          endif
 
-        " For dark version.
-        set background=dark
-        " Set contrast.
-        " This configuration option should be placed before `colorscheme gruvbox-material`.
-        " Available values: 'hard', 'medium'(default), 'soft'
-        let g:gruvbox_material_background = 'medium'
+          " For dark version.
+          set background=dark
+          " Set contrast.
+          " This configuration option should be placed before `colorscheme gruvbox-material`.
+          " Available values: 'hard', 'medium'(default), 'soft'
+          let g:gruvbox_material_background = 'medium'
 
-        " For better performance
-        let g:gruvbox_material_better_performance = 1
-        colorscheme gruvbox-material
+          " For better performance
+          let g:gruvbox_material_better_performance = 1
+          colorscheme gruvbox-material
 
-        lua vim.cmd('syntax on')
+          lua vim.cmd('syntax on')
 
-        " tabs and spaces
-        set smartindent
-        set expandtab
-        set tabstop=4
-        set softtabstop=4
-        set shiftwidth=4
+          " tabs and spaces
+          set smartindent
+          set expandtab
+          set tabstop=4
+          set softtabstop=4
+          set shiftwidth=4
 
-        set number relativenumber
+          set number relativenumber
         '';
       };
     };
