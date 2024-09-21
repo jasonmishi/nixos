@@ -175,6 +175,7 @@ in {
       poetry # python package manager
       jdk # java development kit
 
+      libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
       obsidian # next gen note taking
       calibre # ebook manager
