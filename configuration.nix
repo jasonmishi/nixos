@@ -173,6 +173,7 @@ in {
       qbittorrent # BitTorrent client
 
       poetry # python package manager
+      jdk # java development kit
 
       zotero # reference manager
       obsidian # next gen note taking
