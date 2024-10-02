@@ -175,6 +175,7 @@ in {
       qbittorrent # BitTorrent client
 
       poetry # python package manager
+      (jetbrains.plugins.addPlugins jetbrains.idea-community [ "github-copilot" ]) # intellij
 
       libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
