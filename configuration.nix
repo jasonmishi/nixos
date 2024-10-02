@@ -53,6 +53,7 @@ in {
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ]; # helps with touchpad issues
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
