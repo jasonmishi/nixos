@@ -176,6 +176,7 @@ in {
 
       poetry # python package manager
       (jetbrains.plugins.addPlugins jetbrains.idea-community [ "github-copilot" ]) # intellij
+      docker-compose
 
       libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
