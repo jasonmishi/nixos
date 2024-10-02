@@ -147,6 +147,7 @@ in {
       vimAlias = true;
       viAlias = true;
     };
+    java.enable = true; # jdk
     firefox.enable = true;
     light.enable = true;
     zsh.enable = true;
@@ -174,7 +175,6 @@ in {
       qbittorrent # BitTorrent client
 
       poetry # python package manager
-      jdk # java development kit
 
       libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
