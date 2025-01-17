@@ -212,7 +212,6 @@ in {
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
   environment.systemPackages = with pkgs; [
     xclip # clipboard support for neovim
     ntfs3g # ntfs(windows) filesystem support for mounting
