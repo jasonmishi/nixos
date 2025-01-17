@@ -6,7 +6,7 @@
 
 let
   home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+    "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
   nixos-hardware =
     builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
 
@@ -53,7 +53,8 @@ in {
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ]; # helps with touchpad issues
+  boot.kernelParams =
+    [ "psmouse.synaptics_intertouch=0" ]; # helps with touchpad issues
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -93,7 +94,7 @@ in {
     };
   };
 
-  services.displayManager.defaultSession = "none+qtile";
+  services.displayManager.defaultSession = "qtile";
   services.libinput = {
     enable = true;
     touchpad = {
@@ -175,7 +176,8 @@ in {
       qbittorrent # BitTorrent client
 
       poetry # python package manager
-      (jetbrains.plugins.addPlugins jetbrains.idea-community [ "github-copilot" ]) # intellij
+      (jetbrains.plugins.addPlugins jetbrains.idea-community
+        [ "github-copilot" ]) # intellij
       docker-compose
 
       libreoffice-fresh # libreoffice with latest features
@@ -186,6 +188,7 @@ in {
       liferea # RSS reader subscription
       actual-budget # budgeting software
       keepassxc # password manager
+      zoom-us
     ];
   };
 
@@ -253,7 +256,7 @@ in {
       kitty = {
         enable = true;
         font.name = "Fira Code";
-        theme = "Gruvbox Material Dark Medium";
+        themeFile = "GruvboxMaterialDarkMedium";
       };
 
       zsh = {
@@ -310,7 +313,7 @@ in {
       enable = true;
       theme = {
         name = "Adwaita-dark";
-        package = pkgs.gnome.gnome-themes-extra;
+        package = pkgs.gnome-themes-extra;
       };
     };
 
