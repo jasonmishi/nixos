@@ -111,7 +111,7 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
   };
 
   # for power management
@@ -174,10 +174,14 @@ in {
       cmus # music player
       nicotine-plus
       qbittorrent # BitTorrent client
+      openttd # transport simulator game
 
       poetry # python package manager
       (jetbrains.plugins.addPlugins jetbrains.idea-community
         [ "github-copilot" ]) # intellij
+
+      # look into using unwrap instead.
+      # (cardinal.override { libjack2 = pipewire.jack; })
       docker-compose
 
       libreoffice-fresh # libreoffice with latest features
@@ -185,7 +189,7 @@ in {
       obsidian # next gen note taking
       calibre # ebook manager
 
-      liferea # RSS reader subscription
+      rssguard # RSS reader subscription
       actual-budget # budgeting software
       keepassxc # password manager
       zoom-us
@@ -213,6 +217,8 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    git 
+
     xclip # clipboard support for neovim
     ntfs3g # ntfs(windows) filesystem support for mounting
 
@@ -222,6 +228,7 @@ in {
 
     neofetch
 
+    qjackctl
     pavucontrol # volume control
     jamesdsp # EQ and effects
 
