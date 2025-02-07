@@ -5,10 +5,11 @@
 { config, pkgs, ... }:
 
 let
-  home-manager = builtins.fetchTarball
-    "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz";
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz"; 
+    sha256 = "15k41il0mvmwyv6jns4z8k6khhmb22jk5gpcqs1paym3l01g6abn"; };
   nixos-hardware =
-    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; rev = "2eccff41bab80839b1d25b303b53d339fbb07087";};
 
   # actual budget .AppImage
   version = "24.8.0";
@@ -50,6 +51,9 @@ in {
     ./hardware-configuration.nix
     (import "${home-manager}/nixos")
   ];
+
+  # enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -203,7 +207,7 @@ in {
     sgit = ''
       sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git -c "include.path=''${XDG_CONFIG_DIR:-$HOME/.config}/git/config" -c "include.path=$HOME/.gitconfig"'';
     svim = "sudo -E -s nvim";
-    upgrade = "nixos-rebuild switch --use-remote-sudo";
+    upgrade = "sudo nixos-rebuild switch --show-trace";
   };
 
   virtualisation.docker = {
@@ -240,6 +244,7 @@ in {
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
+  environment.variables.EDITOR = "nvim";
 
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
