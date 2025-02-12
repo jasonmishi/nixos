@@ -83,10 +83,10 @@
   };
 
   # Wayland, X, etc. support for session vars
-  # systemd.user.sessionVariables = home-manager.users.jasonmishi.home.sessionVariables;
+  systemd.user.sessionVariables = config.home.sessionVariables;
 
   # not set by default keep it as the initially installed version 
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
 
   programs.home-manager.enable = true;
 }
