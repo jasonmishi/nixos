@@ -2,12 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz"; 
-    sha256 = "15k41il0mvmwyv6jns4z8k6khhmb22jk5gpcqs1paym3l01g6abn"; };
   nixos-hardware =
     builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; rev = "2eccff41bab80839b1d25b303b53d339fbb07087";};
 
@@ -49,7 +46,6 @@ in {
   imports = [ # Include the results of the hardware scan.
     (import "${nixos-hardware}/lenovo/thinkpad/t480")
     ./hardware-configuration.nix
-    (import "${home-manager}/nixos")
   ];
 
   # enable flakes
@@ -243,98 +239,12 @@ in {
 
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+
   ];
   environment.variables.EDITOR = "nvim";
 
   fonts.packages = with pkgs;
     [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
-
-  home-manager.users.jasonmishi = {
-    home.packages = [
-      (pkgs.buildEnv {
-        name = "my-scripts";
-        paths = [ ./scripts ];
-      })
-    ];
-
-    home.file.qtile_config = {
-      source = ./qtile;
-      target = ".config/qtile";
-      recursive = true;
-    };
-
-    programs = {
-      kitty = {
-        enable = true;
-        font.name = "Fira Code";
-        themeFile = "GruvboxMaterialDarkMedium";
-      };
-
-      zsh = {
-        enable = true;
-        initExtra = ""; # create .zshrc file
-      };
-
-      neovim = {
-        enable = true;
-        plugins = [
-          pkgs.vimPlugins.gruvbox-material-nvim
-          {
-            plugin = pkgs.vimPlugins.nvim-colorizer-lua;
-            config = "lua require'colorizer'.setup()";
-          }
-        ];
-        extraConfig = ''
-          lua vim.api.nvim_set_keymap('i', 'jk', '<ESC>', { noremap = true })
-          " Important!!
-          if has('termguicolors')
-              set termguicolors
-          endif
-
-          " For dark version.
-          set background=dark
-          " Set contrast.
-          " This configuration option should be placed before `colorscheme gruvbox-material`.
-          " Available values: 'hard', 'medium'(default), 'soft'
-          let g:gruvbox_material_background = 'medium'
-
-          " For better performance
-          let g:gruvbox_material_better_performance = 1
-          colorscheme gruvbox-material
-
-          lua vim.cmd('syntax on')
-
-          " tabs and spaces
-          set smartindent
-          set expandtab
-          set tabstop=4
-          set softtabstop=4
-          set shiftwidth=4
-
-          set number relativenumber
-        '';
-      };
-    };
-
-    dconf.settings = {
-      "org/gnome/desktop/interface" = { color-scheme = "prefer-dark"; };
-    };
-
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome-themes-extra;
-      };
-    };
-
-    # Wayland, X, etc. support for session vars
-    systemd.user.sessionVariables =
-      config.home-manager.users.jasonmishi.home.sessionVariables;
-
-    # not set by default keep it as the initially installed version 
-    home.stateVersion = "23.11";
-  };
 
   qt = {
     enable = true;
