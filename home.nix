@@ -30,6 +30,8 @@
     };
 
     neovim = {
+      viAlias = true;
+      vimAlias = true;
       enable = true;
       plugins = [
         pkgs.vimPlugins.gruvbox-material-nvim
