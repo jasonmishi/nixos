@@ -5,8 +5,10 @@
 { config, pkgs, inputs, ... }:
 
 let
-  nixos-hardware =
-    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; rev = "2eccff41bab80839b1d25b303b53d339fbb07087";};
+  nixos-hardware = builtins.fetchGit {
+    url = "https://github.com/NixOS/nixos-hardware.git";
+    rev = "2eccff41bab80839b1d25b303b53d339fbb07087";
+  };
 
   # actual budget .AppImage
   version = "24.8.0";
@@ -182,6 +184,8 @@ in {
 
       # look into using unwrap instead.
       docker-compose
+      awscli2
+      terraform
 
       libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
@@ -216,7 +220,7 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git 
+    git
 
     xclip # clipboard support for neovim
     ntfs3g # ntfs(windows) filesystem support for mounting
