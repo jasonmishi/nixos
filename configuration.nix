@@ -111,7 +111,7 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = true;
+    # jack.enable = true;
   };
 
   # for power management
@@ -181,7 +181,6 @@ in {
         [ "github-copilot" ]) # intellij
 
       # look into using unwrap instead.
-      # (cardinal.override { libjack2 = pipewire.jack; })
       docker-compose
 
       libreoffice-fresh # libreoffice with latest features
@@ -228,7 +227,6 @@ in {
 
     neofetch
 
-    qjackctl
     pavucontrol # volume control
     jamesdsp # EQ and effects
 
