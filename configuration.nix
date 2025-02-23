@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, pkgs-unstable, inputs, ... }:
 
 let
   nixos-hardware = builtins.fetchGit {
@@ -169,7 +169,7 @@ in {
     isNormalUser = true;
     description = "Jason Mishike";
     extraGroups = [ "networkmanager" "wheel" "video" ];
-    packages = with pkgs; [
+    packages = (with pkgs; [
       feh # wallpaper for qtile
       flameshot # screenshots for X11
 
@@ -191,12 +191,15 @@ in {
       zotero # reference manager
       obsidian # next gen note taking
       calibre # ebook manager
+      google-chrome # chrome debugging when needed
 
-      rssguard # RSS reader subscription
       actual-budget # budgeting software
       keepassxc # password manager
       zoom-us
-    ];
+    ]) ++ (with pkgs-unstable;
+      [
+        rssguard # RSS reader subscription
+      ]);
   };
 
   # Allow unfree packages
@@ -233,8 +236,6 @@ in {
 
     pavucontrol # volume control
     jamesdsp # EQ and effects
-
-    google-chrome
 
     vscode-fhs # vscode with fhs for extensions1
     neovim
