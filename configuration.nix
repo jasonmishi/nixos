@@ -210,6 +210,7 @@ in {
       sudo SSH_AUTH_SOCK=$SSH_AUTH_SOCK git -c "include.path=''${XDG_CONFIG_DIR:-$HOME/.config}/git/config" -c "include.path=$HOME/.gitconfig"'';
     svim = "sudo -E -s nvim";
     upgrade = "sudo nixos-rebuild switch --show-trace";
+    update = "sudo nix flake update --flake /etc/nixos";
   };
 
   virtualisation.docker = {
