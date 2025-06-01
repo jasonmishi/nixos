@@ -21,12 +21,11 @@ let
     sha256 = "037aa78k818vv0fx3gr398lf1kmg6mkcpp98wv0vj7h6yjj8d6vd";
   };
 
-  appimageContents = pkgs.appimageTools.extractType1 { inherit name src; };
+  appimageContents = pkgs.appimageTools.extractType1 { inherit pname version src; };
   actual-budget = pkgs.appimageTools.wrapType1 {
-    inherit name src;
+    inherit pname version src;
 
     extraInstallCommands = ''
-      mv $out/bin/${name} $out/bin/${pname}
       install -m 444 -D ${appimageContents}/desktop-electron.desktop -t $out/share/applications
       mv $out/share/applications/desktop-electron.desktop $out/share/applications/${pname}.desktop
       substituteInPlace $out/share/applications/${pname}.desktop \
@@ -179,8 +178,10 @@ in {
       openttd # transport simulator game
 
       poetry # python package manager
-      (jetbrains.plugins.addPlugins jetbrains.idea-community
-        [ "github-copilot" ]) # intellij
+
+      # broken because of https://github.com/NixOS/nixpkgs/issues/400317
+      #(jetbrains.plugins.addPlugins jetbrains.idea-community
+      #  [ "github-copilot" ]) # intellij
 
       # look into using unwrap instead.
       docker-compose
@@ -192,13 +193,14 @@ in {
       obsidian # next gen note taking
       calibre # ebook manager
       google-chrome # chrome debugging when needed
+      rssguard # RSS reader subscription
 
       actual-budget # budgeting software
       keepassxc # password manager
       zoom-us
     ]) ++ (with pkgs-unstable;
       [
-        rssguard # RSS reader subscription
+          quickemu
       ]);
   };
 
@@ -248,7 +250,7 @@ in {
   environment.variables.EDITOR = "nvim";
 
   fonts.packages = with pkgs;
-    [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    [ nerd-fonts.fira-code ];
 
   qt = {
     enable = true;
