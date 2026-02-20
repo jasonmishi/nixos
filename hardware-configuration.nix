@@ -12,6 +12,9 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # fix problems with VirtualBox https://github.com/NixOS/nixpkgs/issues/363887#issuecomment-2536693220
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/da77d068-f631-4927-b575-081ea268d58f";
     fsType = "ext4";

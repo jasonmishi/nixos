@@ -45,10 +45,14 @@ def set_up_screens(screens):
         if screen.setup_command:
             os.system(screen.setup_command)
 
+    # try switching off disconnected screens here
+    # then run reconfigure_screens
+
 
 @hook.subscribe.startup
 def start_up():
     set_up_screens(system.screens)
+    # try putting a wait here for a second
     qhelper_screens.setWallpaper()
 
 

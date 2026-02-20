@@ -48,12 +48,14 @@ in {
     (import "${nixos-hardware}/lenovo/thinkpad/t480")
     ./hardware-configuration.nix
   ];
+  hardware.bluetooth.enable = true;
 
   # enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.memtest86.enable = true;
   boot.kernelParams =
     [ "psmouse.synaptics_intertouch=0" ]; # helps with touchpad issues
 
@@ -78,6 +80,7 @@ in {
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  services.gnome.gcr-ssh-agent.enable = false;
   # Configure X11 settings
   services.xserver = {
     xkb = {
@@ -143,6 +146,7 @@ in {
 
   programs = {
     git.enable = true;
+    dconf.enable = true;
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -172,12 +176,12 @@ in {
       feh # wallpaper for qtile
       flameshot # screenshots for X11
 
+      gsettings-desktop-schemas
       cmus # music player
+      kid3-qt # music tag editor
       nicotine-plus
       qbittorrent # BitTorrent client
       openttd # transport simulator game
-
-      poetry # python package manager
 
       # broken because of https://github.com/NixOS/nixpkgs/issues/400317
       #(jetbrains.plugins.addPlugins jetbrains.idea-community
@@ -185,13 +189,13 @@ in {
 
       # look into using unwrap instead.
       docker-compose
-      awscli2
-      terraform
 
       libreoffice-fresh # libreoffice with latest features
       zotero # reference manager
       obsidian # next gen note taking
+      anki # flashcards 
       calibre # ebook manager
+
       google-chrome # chrome debugging when needed
       rssguard # RSS reader subscription
 
@@ -200,7 +204,7 @@ in {
       zoom-us
     ]) ++ (with pkgs-unstable;
       [
-          quickemu
+        # unstable packages go here
       ]);
   };
 
@@ -222,6 +226,10 @@ in {
       setSocketVariable = true;
     };
   };
+
+  # Oracle VirtualBox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "jasonmishi" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
